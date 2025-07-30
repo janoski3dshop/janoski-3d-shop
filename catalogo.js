@@ -21,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             produtos.forEach(produto => {
                 const card = document.createElement('div');
                 
-                // ===== ALTERAÇÃO APLICADA AQUI =====
-                // Adicionamos as classes de transição e hover para o efeito de "flutuar"
                 card.className = 'bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-200 dark:border-slate-700 flex flex-col group transition duration-300 transform hover:-translate-y-2';
                 
                 card.setAttribute('data-aos', 'fade-up');
@@ -43,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="${urlOriginalProduto}" target="_blank" class="text-indigo-500 dark:text-cyan-400 hover:underline">${nomeAutor}</a>
                         </p>
                         <div class="flex justify-between items-center mt-auto pt-4">
-                            <span class="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+                            <!-- ===== ALTERAÇÃO APLICADA AQUI ===== -->
+                            <span class="text-2xl font-extrabold bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">
                                 Sob Consulta
                             </span>
                             <a href="orcamento.html" class="text-white font-bold py-2 px-4 rounded-lg transition transform group-hover:scale-105 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 shadow-lg">
