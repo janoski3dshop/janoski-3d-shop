@@ -14,22 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const produtos = await response.json();
 
-            loadingMessage.style.display = 'none';
+            if (loadingMessage) {
+                loadingMessage.style.display = 'none';
+            }
 
             produtos.forEach(produto => {
                 const card = document.createElement('div');
-                card.className = 'bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-200 dark:border-slate-700 flex flex-col group';
+                
+                // ===== ALTERAÇÃO APLICADA AQUI =====
+                // Adicionamos as classes de transição e hover para o efeito de "flutuar"
+                card.className = 'bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-200 dark:border-slate-700 flex flex-col group transition duration-300 transform hover:-translate-y-2';
+                
                 card.setAttribute('data-aos', 'fade-up');
 
-                // ===== PONTO DE CORREÇÃO =====
-                // Ajuste os nomes das propriedades para corresponderem ao seu JSON.
-                // Por exemplo, se o nome do produto for 'title', use produto.title.
-                
-                const nomeProduto = produto.nome || produto.title || 'Nome Indisponível';
-                // CORREÇÃO APLICADA AQUI: Usando 'primaryImage'
+                const nomeProduto = produto.title || produto.nome || 'Nome Indisponível';
                 const urlImagem = produto.primaryImage || produto.imagemURL || produto.imageUrl || produto.image;
-                const nomeAutor = produto.autor || produto.author || 'Autor Desconhecido';
-                const urlOriginalProduto = produto.urlOriginal || produto.url;
+                const nomeAutor = produto.author || produto.autor || 'Autor Desconhecido';
+                const urlOriginalProduto = produto.url || produto.urlOriginal;
 
                 card.innerHTML = `
                     <div class="w-full h-64 bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
@@ -52,14 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
-                productGrid.appendChild(card);
+                if (productGrid) {
+                    productGrid.appendChild(card);
+                }
             });
 
         } catch (error) {
             console.error("Não foi possível carregar os produtos:", error);
-            loadingMessage.textContent = 'Erro ao carregar os produtos. Verifique o ficheiro JSON.';
+            if (loadingMessage) {
+                loadingMessage.textContent = 'Erro ao carregar os produtos. Verifique o ficheiro JSON.';
+            }
         }
     }
 
-    carregarProdutos();
+    // Só executa a função se estivermos na página do catálogo
+    if (productGrid) {
+        carregarProdutos();
+    }
 });
