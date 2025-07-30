@@ -72,3 +72,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 });
+
+// ...seu código de menu e dark mode...
+
+// Inicializa a biblioteca de animação
+AOS.init({
+    duration: 800, // Duração da animação
+    once: true,    // Anima apenas uma vez
+});
